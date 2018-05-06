@@ -9,19 +9,24 @@
     <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
     <script src='/vendor.js'></script>
     <script src='/app.js'></script>
+    <script>
+      document.write('<script src="http://' + (location.host || '${1:localhost}').split(':')[0] + ':${2:35729}/livereload.js?snipver=1"></' + 'script>')
+    </script>
     <style type="text/css" media="all">
       body { margin-top: 30px; }
     </style>
   </head>
   <body>
-    <div class='container'>
-      <div class='row'>
-        <div class='one-half column'>
-          <h3>Learn JavaScript, one puzzle at a time.</h3>
-          <a href='' class='button button-primary'>Start Now!</a>
-        </div>
-        <div class='one-half column'>
-          <img src='/images/HeroImage.jpg'>
+    <div class="markup">
+      <div class="view-container container">
+        <div class="row">
+          <div class="one-half column">
+            <h3>Learn JavaScript, one puzzle at a time.</h3>
+            <a href="" class="button button-primary">Start Now!</a>
+          </div>
+          <div class="one-half column">
+            <img src="/images/HeroImage.jpg">
+          </div>
         </div>
       </div>
     </div>
