@@ -18,3 +18,11 @@ learnjs.showView = function(hash) {
     $('.view-container').empty().append(viewFn(hashParts[1]));
   }
 };
+
+learnjs.appOnReady = function() {
+  window.onhashchange = function() {
+    learnjs.showView(window.location.hash);
+  }
+
+  learnjs.showView(window.location.hash);
+}
