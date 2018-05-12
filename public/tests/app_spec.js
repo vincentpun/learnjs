@@ -15,6 +15,12 @@ describe('LearnJS', function() {
     expect(learnjs.problemView).toHaveBeenCalledWith('42');
   });
 
+  it('triggers removingView event when removing the view', function() {
+    spyOn(learnjs, 'triggerEvent');
+    learnjs.showView('#problem-1');
+    expect(learnjs.triggerEvent).toHaveBeenCalledWith('removingView', []);
+  });
+
   it('invokes the router when loaded', function() {
     spyOn(learnjs, 'showView');
     learnjs.appOnReady();
@@ -44,6 +50,15 @@ describe('LearnJS', function() {
     expect(elem.fadeIn).toHaveBeenCalled();
   });
 
+  it('can trigger events on the view', function() {
+    callback = jasmine.createSpy('callback');
+    var div = $('<div>').bind('fooEvent', callback);
+    $('.view-container').append(div);
+    learnjs.triggerEvent('fooEvent', ['bar']);
+    expect(callback).toHaveBeenCalled();
+    expect(callback.calls.argsFor(0)[1]).toEqual('bar');
+  });
+
   describe('problem view', function () {
     var view;
     beforeEach(function() {
@@ -60,6 +75,27 @@ describe('LearnJS', function() {
 
     it('shows the problem code', function() {
       expect(view.find('[data-name="code"]').text()).toEqual('function problem() { return __; }');
+    });
+
+    describe('skip button', function() {
+      it('is added to the navbar when the view is added', function() {
+        expect($('.nav-list .skip-btn').length).toEqual(1);
+      });
+
+      it('is removed from the navbar when the view is removed', function() {
+        view.trigger('removingView');
+        expect($('.nav-list .skip-btn').length).toEqual(0);
+      });
+
+      it('contains a link to the next problem', function() {
+        expect($('.nav-list .skip-btn a').attr('href')).toEqual('#problem-2');
+      });
+
+      it('does not added when at the last problem', function() {
+        view.trigger('removingView');
+        view = learnjs.problemView('2');
+        expect($('.nav-list .skip-btn').length).toEqual(0);
+      });
     });
 
     describe('answer section', function() {
