@@ -37,7 +37,7 @@ learnjs.buildCorrectFlash = function(problemNum) {
     link.attr('href', '#problem-' + (problemNum + 1));
   } else {
     link.attr('href', '');
-    link.text('Your\'re Finished!');
+    link.text('You\'re Finished!');
   }
   return correctFlash;
 }

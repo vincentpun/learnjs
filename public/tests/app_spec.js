@@ -28,6 +28,12 @@ describe('LearnJS', function() {
     expect(learnjs.showView).toHaveBeenCalledWith(window.location.hash);
   });
 
+  it('can redirect to the main view after the last problem is answered', function() {
+    var flash = learnjs.buildCorrectFlash(2);
+    expect(flash.find('a').attr('href')).toEqual("");
+    expect(flash.find('a').text()).toEqual("You're Finished!");
+  });
+
   it('can flash an element while setting the text', function() {
     var elem = $('<p>');
     spyOn(elem, 'fadeOut').and.callThrough();
