@@ -54,7 +54,7 @@ describe('LearnJS', function() {
         resultFlash = view.find('.result');
       });
 
-      it('can check a correct answer by hitting a button', function() {
+      it('flashes the result', function() {
         view.find('.answer').val('true');
         view.find('.check-btn').click();
         expect(learnjs.flashElement).toHaveBeenCalledWith(resultFlash, 'Correct!');
